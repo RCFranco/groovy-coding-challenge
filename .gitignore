@@ -1,0 +1,30 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# ntellij stuff
+**/.idea/
+
+# eclipse stuff
+**/.classpath
+**/.project
+**/.settings/
+
+# Ignore Gradle project-specific cache directory
+**/.gradle
+
+# Ignore Gradle build output directory
+**/build/
+**/bin/
+
+# macos stuff
+**/.DS_Store
