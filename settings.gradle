@@ -1,0 +1,3 @@
+rootProject.name = 'groovy-coding-challenge'
+
+include 'checkout_terminal', 'message_validator'
