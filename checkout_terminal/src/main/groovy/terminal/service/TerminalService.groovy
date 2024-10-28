@@ -15,10 +15,10 @@ class TerminalService {
     @PostConstruct
     void initProducts() {
         setPricing([
-                new Product("A", 2.00, 4, 7.00),   // A: $2 each, 4 for $7
-                new Product("B", 12.00), // B: $12 each
-                new Product("C", 1.25, 6, 6.00),   // C: $1.25 each, 6 for $6
-                new Product("D", 0.15)   // D: $0.15 each
+                new Product('A', 2.00, 4, 7.00),   // A: $2 each, 4 for $7
+                new Product('B', 12.00),           // B: $12 each
+                new Product('C', 1.25, 6, 6.00),   // C: $1.25 each, 6 for $6
+                new Product('D', 0.15)             // D: $0.15 each
         ])
     }
 
@@ -28,7 +28,6 @@ class TerminalService {
         }
     }
 
-    // Scan a product by its code
     void scan(String productCode) {
         if (!pricing.containsKey(productCode)) {
             throw new IllegalArgumentException("Product $productCode not found")
@@ -50,12 +49,11 @@ class TerminalService {
                 total += quantity * product.unitPrice
             }
         }
-        return total.setScale(2, RoundingMode.HALF_UP)
+        total.setScale(2, RoundingMode.HALF_UP)
     }
 
-    // Get all products with their pricing
     List<Product> getAllProducts() {
-        return pricing.values().toList()
+        pricing.values().toList()
     }
 
     void resetCart() {

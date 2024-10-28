@@ -3,24 +3,29 @@ package terminal.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import terminal.service.TerminalService
 import terminal.model.Product
 
 @RestController
-@RequestMapping("/api/pos")
+@RequestMapping('/api/pos')
 class TerminalController {
 
     @Autowired
     private TerminalService terminal
 
-    @PostMapping("/pricing")
+    @PostMapping('/pricing')
     void setPricing(@RequestBody List<Product> products) {
-        terminal.setPricing(products)
+        terminal.pricing = products
     }
 
-    @PostMapping("/scan/{code}")
-    ResponseEntity<String> scanProduct(@PathVariable("code") String code) {
+    @PostMapping('/scan/{code}')
+    ResponseEntity<String> scanProduct(@PathVariable('code') String code) {
         try {
             terminal.scan(code)
             return ResponseEntity.ok("Product scanned: $code" as String)
@@ -29,17 +34,17 @@ class TerminalController {
         }
     }
 
-    @GetMapping("/total")
+    @GetMapping('/total')
     BigDecimal getTotal() {
-        return terminal.total
+        terminal.total
     }
 
-    @GetMapping("/products")
+    @GetMapping('/products')
     List<Product> getAllProducts() {
-        return terminal.getAllProducts()
+        terminal.allProducts
     }
 
-    @GetMapping("/reset")
+    @GetMapping('/reset')
     void resetCart() {
         terminal.resetCart()
     }

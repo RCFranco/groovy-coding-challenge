@@ -13,10 +13,10 @@ class Product {
 
     @JsonCreator
     Product(
-            @JsonProperty("code") String code,
-            @JsonProperty("unitPrice") BigDecimal unitPrice,
-            @JsonProperty("volumeQuantity") Integer volumeQuantity = null,
-            @JsonProperty("volumePrice") BigDecimal volumePrice = null
+            @JsonProperty('code') String code,
+            @JsonProperty('unitPrice') BigDecimal unitPrice,
+            @JsonProperty('volumeQuantity') Integer volumeQuantity = null,
+            @JsonProperty('volumePrice') BigDecimal volumePrice = null
     ) {
         this.code = code
         this.unitPrice = unitPrice
