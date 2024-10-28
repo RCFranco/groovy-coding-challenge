@@ -16,11 +16,11 @@ class ValidatorBuilder<MESSAGE> {
         }
 
         boolean validate(MESSAGE input) {
-            return this.validation.apply(valueSupplier.apply(input))
+            this.validation.apply(valueSupplier.apply(input))
         }
 
         String getMessage() {
-            return message
+            message
         }
     }
 
@@ -37,11 +37,11 @@ class ValidatorBuilder<MESSAGE> {
 
             validations.each { validation ->
                 if (!validation.validate(message)) {
-                    errors.add(validation.getMessage())
+                    errors.add(validation.message)
                 }
             }
 
-            return new ValidationResult(errors)
+            new ValidationResult(errors)
         }
     }
 
@@ -49,10 +49,10 @@ class ValidatorBuilder<MESSAGE> {
 
     ValidatorBuilder<MESSAGE> add(String message, Function<MESSAGE, ?> valueSupplier, Function<?, Boolean> validation) {
         validations.add(new Validation<>(message, valueSupplier, validation))
-        return this
+        this
     }
 
     Validator<MESSAGE> build() {
-        return new MyValidator<>(validations)
+        new MyValidator<>(validations)
     }
 }

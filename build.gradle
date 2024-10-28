@@ -7,6 +7,7 @@ allprojects {
 subprojects {
     apply plugin: 'groovy'
     apply plugin: 'application'
+    apply plugin: 'codenarc'
 
     java {
         toolchain {
@@ -25,5 +26,13 @@ subprojects {
 
     tasks.named('test') {
         useJUnitPlatform()
+    }
+
+    codenarc {
+        toolVersion = '3.5.0-groovy-4.0'
+        configFile = file("${rootProject.projectDir}/config/codenarc/codenarc.groovy")
+        maxPriority1Violations = 0
+        maxPriority2Violations = 5
+        maxPriority3Violations = 10
     }
 }
