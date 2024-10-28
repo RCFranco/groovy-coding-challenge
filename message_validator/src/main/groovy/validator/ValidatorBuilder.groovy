@@ -5,7 +5,6 @@ import java.util.function.Function
 class ValidatorBuilder<MESSAGE> {
 
     class Validation<MESSAGE, TRANSFORMED_MESSAGE> {
-
         private final String message
         private final Function<MESSAGE, TRANSFORMED_MESSAGE> valueSupplier
         private final Function<TRANSFORMED_MESSAGE, Boolean> validation
@@ -17,43 +16,43 @@ class ValidatorBuilder<MESSAGE> {
         }
 
         boolean validate(MESSAGE input) {
-            this.validation.apply(valueSupplier.apply(input))
+            return this.validation.apply(valueSupplier.apply(input))
+        }
+
+        String getMessage() {
+            return message
         }
     }
 
-    class MyValidator<MESSAGE, TRANSFORMED_MESSAGE> implements Validator<MESSAGE> {
+    class MyValidator<MESSAGE> implements Validator<MESSAGE> {
+        private final List<Validation<MESSAGE, ?>> validations
 
-        private final List<Validation> validations
-
-        MyValidator(List<Validation> validations) {
+        MyValidator(List<Validation<MESSAGE, ?>> validations) {
             this.validations = validations
         }
 
+        @Override
         ValidationResult validate(MESSAGE message) {
             List<String> errors = []
 
-            for (Validation v : this.validations) {
-                boolean result = v.validate(message)
-
-                if (!result) {
-                    errors.add(v.message)
+            validations.each { validation ->
+                if (!validation.validate(message)) {
+                    errors.add(validation.getMessage())
                 }
             }
 
-            new ValidationResult(errors)
+            return new ValidationResult(errors)
         }
     }
 
-    private List<Validation> validations = []
+    private final List<Validation<MESSAGE, ?>> validations = []
 
     ValidatorBuilder<MESSAGE> add(String message, Function<MESSAGE, ?> valueSupplier, Function<?, Boolean> validation) {
-        // TODO: Add the validation
-        this.validations.add(new Validation(message, valueSupplier, validation))
-        this
+        validations.add(new Validation<>(message, valueSupplier, validation))
+        return this
     }
 
     Validator<MESSAGE> build() {
-        // TODO: Implement a validator given the added validations. Replace this with an actual implementation of validator.
-        new MyValidator<>(this.validations)
+        return new MyValidator<>(validations)
     }
 }
