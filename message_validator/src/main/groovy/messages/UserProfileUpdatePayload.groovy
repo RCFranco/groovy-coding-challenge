@@ -11,4 +11,13 @@ class UserProfileUpdatePayload {
     public long lastSeen // milliseconds since 1970
     public String gender // 'male', 'female'
     public String interestedIn // 'men', 'women', 'both'
+
+    UserProfileUpdatePayload(long userId, String name, long birthDate, long lastSeen, String gender, String interestedIn) {
+        this.userId = userId
+        this.name = name
+        this.birthDate = birthDate
+        this.lastSeen = lastSeen
+        this.gender = gender
+        this.interestedIn = interestedIn
+    }
 }

@@ -1,8 +1,10 @@
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.8.5'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.18.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.0'
+    implementation 'info.picocli:picocli:4.7.6'
 }
 
 application {
-    mainClass = 'terminal.Terminal'
+    mainClass = 'validator.ValidatorCliApp'
 }
+

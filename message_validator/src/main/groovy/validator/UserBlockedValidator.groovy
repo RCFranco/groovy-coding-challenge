@@ -16,6 +16,6 @@ class UserBlockedValidator implements Validator<UserBlocked> {
 
     @Override
     ValidationResult validate(UserBlocked message) {
-        validator.validate(message) // Removed unnecessary `return`
+        validator.validate(message)
     }
 }
