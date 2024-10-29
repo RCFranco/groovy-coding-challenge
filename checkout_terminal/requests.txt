@@ -1,0 +1,24 @@
+### Set Pricing
+curl --request POST \
+  --url http://localhost:8080/api/pos/pricing \
+  --header 'Content-Type: application/json' \
+  --data '[
+	{
+    "code": "G",
+    "unitPrice": 1.00,
+    "volumeQuantity": 10,
+    "volumePrice": 9.00
+	}
+]	'
+
+### Scan a Product
+curl --request POST --url http://localhost:8080/api/pos/scan/A
+
+### Get Total
+curl --request GET --url http://localhost:8080/api/pos/total
+
+### Get All Products
+curl --request GET --url http://localhost:8080/api/pos/products
+
+### Reset Cart
+curl --request GET --url http://localhost:8080/api/pos/reset
